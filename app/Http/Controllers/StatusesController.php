@@ -11,6 +11,7 @@ class StatusesController extends Controller
     {
         return Status::latest()->paginate();
     }
+
     public function store()
     {
         request()->validate(['body' => 'required|min:5']);

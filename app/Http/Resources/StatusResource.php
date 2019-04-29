@@ -15,10 +15,12 @@ class StatusResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'body' => $this->body,
             'user_name' => $this->user->name,
             'user_avatar' => 'https://picsum.photos/200',
-            'ago' => $this->created_at->diffForHumans()
+            'ago' => $this->created_at->diffForHumans(),
+            'is_liked' => $this->isLiked()
         ];
     }
 }

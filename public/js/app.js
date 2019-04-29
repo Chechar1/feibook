@@ -1833,6 +1833,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1850,6 +1852,13 @@ __webpack_require__.r(__webpack_exports__);
     EventBus.$on('status-created', function (status) {
       _this.statuses.unshift(status);
     });
+  },
+  methods: {
+    like: function like(status) {
+      axios.post("/statuses/".concat(status.id, "/likes")).then(function (res) {
+        status.is_liked = true;
+      });
+    }
   }
 });
 
@@ -37232,35 +37241,55 @@ var render = function() {
     "div",
     _vm._l(_vm.statuses, function(status) {
       return _c("div", { staticClass: "card border-0 mb-3 shadow-sm" }, [
-        _c("div", { staticClass: "card-body d-flex flex-column" }, [
-          _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
-            _c("img", {
-              staticClass: "rounded mr-3 shadow-sm",
-              attrs: {
-                width: "40px",
-                src: "https://picsum.photos/200",
-                alt: ""
-              }
-            }),
-            _vm._v(" "),
-            _c("div", {}, [
-              _c("h5", {
-                staticClass: "mb-1",
-                domProps: { textContent: _vm._s(status.user_name) }
+        _c(
+          "div",
+          { staticClass: "card-body d-flex flex-column" },
+          [
+            _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
+              _c("img", {
+                staticClass: "rounded mr-3 shadow-sm",
+                attrs: {
+                  width: "40px",
+                  src: "https://picsum.photos/200",
+                  alt: ""
+                }
               }),
               _vm._v(" "),
-              _c("div", {
-                staticClass: "small text-muted",
-                domProps: { textContent: _vm._s(status.ago) }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("p", {
-            staticClass: "card-text text-secondary",
-            domProps: { textContent: _vm._s(status.body) }
-          })
-        ])
+              _c("div", {}, [
+                _c("h5", {
+                  staticClass: "mb-1",
+                  domProps: { textContent: _vm._s(status.user_name) }
+                }),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "small text-muted",
+                  domProps: { textContent: _vm._s(status.ago) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", {
+              staticClass: "card-text text-secondary",
+              domProps: { textContent: _vm._s(status.body) }
+            }),
+            _vm._v(" "),
+            status.is_liked
+              ? _c("button", [_vm._v("TE GUSTA")])
+              : _c(
+                  "BUtton",
+                  {
+                    attrs: { dusk: "like-btn" },
+                    on: {
+                      click: function($event) {
+                        return _vm.like(status)
+                      }
+                    }
+                  },
+                  [_vm._v("Me gusta")]
+                )
+          ],
+          1
+        )
       ])
     }),
     0

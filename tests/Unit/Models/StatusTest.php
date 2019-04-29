@@ -20,6 +20,7 @@ class StatusTest extends TestCase
 
         $this->assertInstanceOf(User::class, $status->user);
     }
+
     /** @test */
     public function a_status_has_many_likes()
     {
@@ -58,4 +59,19 @@ class StatusTest extends TestCase
         $this->assertEquals(1, $status->fresh()->likes->count());
     }
 
+    /** @test */
+    public function a_status_knows_if_it_has_been_liked()
+    {
+        $status = factory(Status::class)->create();
+
+        $this->assertFalse($status->isLiked());
+
+        $this->actingAs(factory(User::class)->create());
+
+        $this->assertFalse($status->isLiked());
+
+        $status->like();
+
+        $this->assertTrue($status->isLiked());
+    }
 }

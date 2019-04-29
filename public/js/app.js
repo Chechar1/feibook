@@ -37289,7 +37289,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("TE GUSTA")]
+                  [_vm._v("Te gusta")]
                 )
               : _c(
                   "BUtton",

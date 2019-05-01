@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ Auth::user() }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title>Feibook</title>
 </head>
@@ -14,7 +15,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-feibook">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">Feibook</a>
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <i class="fab fa-android text-primary mr-1"></i>
+            Feibook</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

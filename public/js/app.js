@@ -1783,6 +1783,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1816,6 +1820,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37216,7 +37226,10 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { id: "create-status" } },
-        [_vm._v("Publicar")]
+        [
+          _c("i", { staticClass: "far fa-paper-plane mr-1" }),
+          _vm._v("\n            Publicar")
+        ]
       )
     ])
   }
@@ -37246,42 +37259,45 @@ var render = function() {
     "div",
     _vm._l(_vm.statuses, function(status) {
       return _c("div", { staticClass: "card border-0 mb-3 shadow-sm" }, [
-        _c(
-          "div",
-          { staticClass: "card-body d-flex flex-column" },
-          [
-            _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
-              _c("img", {
-                staticClass: "rounded mr-3 shadow-sm",
-                attrs: {
-                  width: "40px",
-                  src: "https://picsum.photos/200",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("div", {}, [
-                _c("h5", {
-                  staticClass: "mb-1",
-                  domProps: { textContent: _vm._s(status.user_name) }
-                }),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "small text-muted",
-                  domProps: { textContent: _vm._s(status.ago) }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", {
-              staticClass: "card-text text-secondary",
-              domProps: { textContent: _vm._s(status.body) }
+        _c("div", { staticClass: "card-body d-flex flex-column" }, [
+          _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
+            _c("img", {
+              staticClass: "rounded mr-3 shadow-sm",
+              attrs: {
+                width: "40px",
+                src: "https://picsum.photos/200",
+                alt: ""
+              }
             }),
             _vm._v(" "),
+            _c("div", {}, [
+              _c("h5", {
+                staticClass: "mb-1",
+                domProps: { textContent: _vm._s(status.user_name) }
+              }),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "small text-muted",
+                domProps: { textContent: _vm._s(status.ago) }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", {
+            staticClass: "card-text text-secondary",
+            domProps: { textContent: _vm._s(status.body) }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-footer p-2" },
+          [
             status.is_liked
               ? _c(
                   "button",
                   {
+                    staticClass: "btn btn-link",
                     attrs: { dusk: "unlike-btn" },
                     on: {
                       click: function($event) {
@@ -37289,11 +37305,12 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Te gusta")]
+                  [_c("strong", [_vm._v("Te gusta")])]
                 )
               : _c(
                   "BUtton",
                   {
+                    staticClass: "btn btn-link",
                     attrs: { dusk: "like-btn" },
                     on: {
                       click: function($event) {

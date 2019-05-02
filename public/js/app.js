@@ -1842,6 +1842,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1864,11 +1869,13 @@ __webpack_require__.r(__webpack_exports__);
     like: function like(status) {
       axios.post("/statuses/".concat(status.id, "/likes")).then(function (res) {
         status.is_liked = true;
+        status.likes_count++;
       });
     },
     unlike: function unlike(status) {
       axios["delete"]("/statuses/".concat(status.id, "/likes")).then(function (res) {
         status.is_liked = false;
+        status.likes_count--;
       });
     }
   }
@@ -37257,6 +37264,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { on: { click: _vm.redirectIfGuest } },
     _vm._l(_vm.statuses, function(status) {
       return _c("div", { staticClass: "card border-0 mb-3 shadow-sm" }, [
         _c("div", { staticClass: "card-body d-flex flex-column" }, [
@@ -37289,41 +37297,44 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-footer p-2" },
-          [
-            status.is_liked
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link",
-                    attrs: { dusk: "unlike-btn" },
-                    on: {
-                      click: function($event) {
-                        return _vm.unlike(status)
-                      }
+        _c("div", { staticClass: "card-footer p-2" }, [
+          status.is_liked
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-link",
+                  attrs: { dusk: "unlike-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.unlike(status)
                     }
-                  },
-                  [_vm._m(0, true)]
-                )
-              : _c(
-                  "BUtton",
-                  {
-                    staticClass:
-                      "btn btn-link far fa-thumbs-up btn-sm text-primary mr-1",
-                    attrs: { dusk: "like-btn" },
-                    on: {
-                      click: function($event) {
-                        return _vm.like(status)
-                      }
+                  }
+                },
+                [_vm._m(0, true)]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass:
+                    "btn btn-link far fa-thumbs-up btn-sm text-primary mr-1",
+                  attrs: { dusk: "like-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.like(status)
                     }
-                  },
-                  [_vm._v("Me gusta")]
-                )
-          ],
-          1
-        )
+                  }
+                },
+                [_vm._v("Me gusta")]
+              )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "float-right mr-2" }, [
+          _c("i", { staticClass: "far fa-thumbs-up btn-sm mr-1" }),
+          _vm._v(" "),
+          _c("span", { attrs: { dusk: "likes-count" } }, [
+            _vm._v(_vm._s(status.likes_count))
+          ])
+        ])
       ])
     }),
     0
@@ -49742,6 +49753,11 @@ module.exports = {
     },
     guest: function guest() {
       return !this.isAuthenticated;
+    }
+  },
+  methods: {
+    redirectIfGuest: function redirectIfGuest() {
+      if (this.guest) return window.location.href = '/login';
     }
   }
 };

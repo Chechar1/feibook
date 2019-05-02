@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click="redirectIfGuest">
         <div class="card border-0 mb-3 shadow-sm" v-for="status in statuses">
             <div class="card-body d-flex flex-column">
                 <div class="d-flex align-items-center mb-3">
@@ -17,8 +17,13 @@
                 v-if="status.is_liked"
                 dusk="unlike-btn"
                 @click="unlike(status)"><strong><i class="fa fa-thumbs-up btn-sm text-primary mr-1"></i>Te gusta</strong></button>
-                <BUtton class="btn btn-link far fa-thumbs-up btn-sm text-primary mr-1" v-else dusk="like-btn" @click="like(status)" >Me gusta</BUtton>
+                <button class="btn btn-link far fa-thumbs-up btn-sm text-primary mr-1" v-else dusk="like-btn" @click="like(status)" >Me gusta</button>
             </div>
+            <div class="float-right mr-2">
+                <i class="far fa-thumbs-up btn-sm mr-1"></i>
+                <span dusk="likes-count">{{ status.likes_count }}</span>
+            </div>
+
         </div>
     </div>
 </template>
@@ -45,17 +50,22 @@
     },
     methods: {
         like(status){
+
+
             axios.post(`/statuses/${status.id}/likes`)
                 .then(res => {
                     status.is_liked = true;
+                    status.likes_count++;
                 })
         },
         unlike(status){
                 axios.delete(`/statuses/${status.id}/likes`)
                     .then(res => {
                         status.is_liked = false;
+                        status.likes_count--;
                     })
-            }
+            },
+
 
     }
 }

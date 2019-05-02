@@ -1784,9 +1784,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37227,8 +37224,11 @@ var staticRenderFns = [
         "button",
         { staticClass: "btn btn-primary", attrs: { id: "create-status" } },
         [
-          _c("i", { staticClass: "far fa-paper-plane mr-1" }),
-          _vm._v("\n            Publicar")
+          _c("i", {
+            staticClass: "fa fa-paper-plane",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" Publicar")
         ]
       )
     ])
@@ -37305,12 +37305,13 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("strong", [_vm._v("Te gusta")])]
+                  [_vm._m(0, true)]
                 )
               : _c(
                   "BUtton",
                   {
-                    staticClass: "btn btn-link",
+                    staticClass:
+                      "btn btn-link far fa-thumbs-up btn-sm text-primary mr-1",
                     attrs: { dusk: "like-btn" },
                     on: {
                       click: function($event) {
@@ -37328,7 +37329,17 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("strong", [
+      _c("i", { staticClass: "fa fa-thumbs-up btn-sm text-primary mr-1" }),
+      _vm._v("Te gusta")
+    ])
+  }
+]
 render._withStripped = true
 
 

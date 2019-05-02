@@ -16,8 +16,8 @@
                 <button class="btn btn-link"
                 v-if="status.is_liked"
                 dusk="unlike-btn"
-                @click="unlike(status)"><strong>Te gusta</strong></button>
-                <BUtton class="btn btn-link" v-else dusk="like-btn" @click="like(status)">Me gusta</BUtton>
+                @click="unlike(status)"><strong><i class="fa fa-thumbs-up btn-sm text-primary mr-1"></i>Te gusta</strong></button>
+                <BUtton class="btn btn-link far fa-thumbs-up btn-sm text-primary mr-1" v-else dusk="like-btn" @click="like(status)" >Me gusta</BUtton>
             </div>
         </div>
     </div>

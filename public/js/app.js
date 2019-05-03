@@ -1847,6 +1847,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37297,44 +37308,55 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-footer p-2" }, [
-          status.is_liked
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-link",
-                  attrs: { dusk: "unlike-btn" },
-                  on: {
-                    click: function($event) {
-                      return _vm.unlike(status)
+        _c(
+          "div",
+          {
+            staticClass:
+              "card-footer p-2 d-flex justify-content-between align-items-center"
+          },
+          [
+            status.is_liked
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm",
+                    attrs: { dusk: "unlike-btn" },
+                    on: {
+                      click: function($event) {
+                        return _vm.unlike(status)
+                      }
                     }
-                  }
-                },
-                [_vm._m(0, true)]
-              )
-            : _c(
-                "button",
-                {
-                  staticClass:
-                    "btn btn-link far fa-thumbs-up btn-sm text-primary mr-1",
-                  attrs: { dusk: "like-btn" },
-                  on: {
-                    click: function($event) {
-                      return _vm.like(status)
+                  },
+                  [_vm._m(0, true)]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm",
+                    attrs: { dusk: "like-btn" },
+                    on: {
+                      click: function($event) {
+                        return _vm.like(status)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Me gusta")]
-              )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "float-right mr-2" }, [
-          _c("i", { staticClass: "far fa-thumbs-up btn-sm mr-1" }),
-          _vm._v(" "),
-          _c("span", { attrs: { dusk: "likes-count" } }, [
-            _vm._v(_vm._s(status.likes_count))
-          ])
-        ])
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "far fa-thumbs-up text-primary mr-1"
+                    }),
+                    _vm._v("\n                Me gusta\n            ")
+                  ]
+                ),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-secondary mr-2" }, [
+              _c("i", { staticClass: "far fa-thumbs-up" }),
+              _vm._v(" "),
+              _c("span", { attrs: { dusk: "likes-count" } }, [
+                _vm._v(_vm._s(status.likes_count))
+              ])
+            ])
+          ]
+        )
       ])
     }),
     0
@@ -37346,8 +37368,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("strong", [
-      _c("i", { staticClass: "fa fa-thumbs-up btn-sm text-primary mr-1" }),
-      _vm._v("Te gusta")
+      _c("i", { staticClass: "fa fa-thumbs-up text-primary mr-1" }),
+      _vm._v("\n                Te gusta\n            ")
     ])
   }
 ]

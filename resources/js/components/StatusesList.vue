@@ -12,18 +12,29 @@
                 <p class="card-text text-secondary" v-text="status.body"></p>
 
             </div>
-            <div class="card-footer p-2">
-                <button class="btn btn-link"
-                v-if="status.is_liked"
-                dusk="unlike-btn"
-                @click="unlike(status)"><strong><i class="fa fa-thumbs-up btn-sm text-primary mr-1"></i>Te gusta</strong></button>
-                <button class="btn btn-link far fa-thumbs-up btn-sm text-primary mr-1" v-else dusk="like-btn" @click="like(status)" >Me gusta</button>
-            </div>
-            <div class="float-right mr-2">
-                <i class="far fa-thumbs-up btn-sm mr-1"></i>
-                <span dusk="likes-count">{{ status.likes_count }}</span>
-            </div>
+            <div class="card-footer p-2 d-flex justify-content-between align-items-center">
 
+                <button v-if="status.is_liked"
+                        @click="unlike(status)"
+                        class="btn btn-link btn-sm"
+                        dusk="unlike-btn"
+                ><strong>
+                    <i class="fa fa-thumbs-up text-primary mr-1"></i>
+                    Te gusta
+                </strong></button>
+
+                <button v-else
+                        @click="like(status)"
+                        class="btn btn-link btn-sm"
+                        dusk="like-btn"
+                ><i class="far fa-thumbs-up text-primary mr-1"></i>
+                    Me gusta
+                </button>
+                <div class="text-secondary mr-2">
+                    <i class="far fa-thumbs-up"></i>
+                    <span dusk="likes-count">{{ status.likes_count }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>

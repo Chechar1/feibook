@@ -10,17 +10,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CreateStatusTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+    @test
+    */
+    public function guests_users_can_not_create_statuses()
+    {
+        $response = $this->postJson(route('statuses.store'), ['body' => 'Mi primer status']);
+        $response->assertStatus(401);
+    }
+
     /**
      @test
      */
-    public function guests_users_can_not_create_statuses()
-    {
-
-        $response = $this->post(route('statuses.store'), ['body' => 'Mi primer status']);
-
-        $response->assertRedirect('login');
-    }
-
     public function an_authenticated_user_can_create_statuses()
     {
         $user = factory(User::class)->create();

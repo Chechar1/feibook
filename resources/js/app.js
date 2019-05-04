@@ -22,7 +22,7 @@ window.Vue = require('vue');
 window.EventBus = new Vue();
 
 Vue.component('status-form', require('./components/StatusForm').default);
-Vue.component('statuses-list', require('./components/StatusesList').default);
+Vue.component('status-list', require('./components/StatusList').default);
 
 import auth from './components/mixins/auth';
 

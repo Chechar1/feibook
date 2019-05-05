@@ -1837,6 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1970,6 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1997,6 +1999,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.newComment = '';
 
         _this.comments.push(res.data.data);
+      })["catch"](function (err) {
+        console.log(err.response.data);
       });
     }
   }
@@ -37383,7 +37387,8 @@ var render = function() {
                 attrs: {
                   name: "body",
                   placeholder:
-                    "¿Qué estás pensando " + _vm.currentUser.name + "?"
+                    "¿Qué estás pensando " + _vm.currentUser.name + "?",
+                  required: ""
                 },
                 domProps: { value: _vm.body },
                 on: {
@@ -37594,7 +37599,8 @@ var render = function() {
                   attrs: {
                     name: "comment",
                     placeholder: "Escribe un comentario...",
-                    rows: "1"
+                    rows: "1",
+                    required: ""
                   },
                   domProps: { value: _vm.newComment },
                   on: {

@@ -1,10 +1,6 @@
 <template>
     <div @click="redirectIfGuest">
-        <status-list-item
-            v-for="status in statuses"
-            :status="status"
-            :key="status.id"
-        ></status-list-item>
+        <status-list-item v-for="status in statuses" :status="status" :key="status.id"></status-list-item>
     </div>
 </template>
 

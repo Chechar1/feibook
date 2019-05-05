@@ -20,14 +20,12 @@
                 <i class="far fa-thumbs-up"></i>
                 <span dusk="likes-count">{{ status.likes_count }}</span>
             </div>
-
             <form @submit.prevent="addComment">
                 <textarea name="comment" v-model="newComment"></textarea>
                 <button dusk="comment-btn">Enviar</button>
             </form>
 
             <div v-for="comment in comments">{{ comment.body }}</div>
-
         </div>
     </div>
 </template>

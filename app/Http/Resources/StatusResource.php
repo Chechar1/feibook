@@ -23,6 +23,7 @@ class StatusResource extends JsonResource
             'is_liked' => $this->isLiked(),
             'likes_count' => $this->likesCount(),
 
+
         ];
     }
 }

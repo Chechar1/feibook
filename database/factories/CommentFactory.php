@@ -11,3 +11,4 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
         }
     ];
 });
+

@@ -1948,6 +1948,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -37463,11 +37485,7 @@ var render = function() {
       _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
         _c("img", {
           staticClass: "rounded mr-3 shadow-sm",
-          attrs: {
-            width: "40px",
-            src: "https://aprendible.com/images/default-avatar.jpg",
-            alt: ""
-          }
+          attrs: { width: "40px", src: "https://picsum.photos/200", alt: "" }
         }),
         _vm._v(" "),
         _c("div", {}, [
@@ -37504,9 +37522,44 @@ var render = function() {
           _c("span", { attrs: { dusk: "likes-count" } }, [
             _vm._v(_vm._s(_vm.status.likes_count))
           ])
-        ]),
-        _vm._v(" "),
-        _c(
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-footer" },
+      _vm._l(_vm.comments, function(comment) {
+        return _c("div", { staticClass: "mb-2" }, [
+          _c("img", {
+            staticClass: "rounded shadow-sm float-left mr-2",
+            attrs: {
+              src: comment.user_avatar,
+              alt: comment.user_name,
+              width: "34px"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card border-0 shadow-sm" }, [
+            _c("div", { staticClass: "card-body p-2 text-secondary" }, [
+              _c("a", { attrs: { href: "#" } }, [
+                _c("strong", [_vm._v(_vm._s(comment.user_name))])
+              ]),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(comment.body) +
+                  "\n                "
+              )
+            ])
+          ])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.isAuthenticated
+      ? _c(
           "form",
           {
             on: {
@@ -37517,48 +37570,65 @@ var render = function() {
             }
           },
           [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newComment,
-                  expression: "newComment"
+            _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("img", {
+                staticClass: "rounded shadow-sm mr-2",
+                attrs: {
+                  width: "34px",
+                  src: "https://picsum.photos/200",
+                  alt: _vm.currentUser.name
                 }
-              ],
-              attrs: { name: "comment" },
-              domProps: { value: _vm.newComment },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newComment,
+                      expression: "newComment"
+                    }
+                  ],
+                  staticClass: "form-control border-0",
+                  attrs: {
+                    name: "comment",
+                    placeholder: "Escribe un comentario...",
+                    rows: "1"
+                  },
+                  domProps: { value: _vm.newComment },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.newComment = $event.target.value
+                    }
                   }
-                  _vm.newComment = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("button", { attrs: { dusk: "comment-btn" } }, [_vm._v("Enviar")])
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
           ]
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.comments, function(comment) {
-          return _c("div", [
-            _vm._v(
-              "\n            " +
-                _vm._s(comment.user_name) +
-                "\n            " +
-                _vm._s(comment.body) +
-                "\n        "
-            )
-          ])
-        })
-      ],
-      2
-    )
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { dusk: "comment-btn" } },
+        [_vm._v("Enviar")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

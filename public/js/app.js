@@ -1945,6 +1945,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -37540,7 +37543,15 @@ var render = function() {
         ),
         _vm._v(" "),
         _vm._l(_vm.comments, function(comment) {
-          return _c("div", [_vm._v(_vm._s(comment.body))])
+          return _c("div", [
+            _vm._v(
+              "\n            " +
+                _vm._s(comment.user_name) +
+                "\n            " +
+                _vm._s(comment.body) +
+                "\n        "
+            )
+          ])
         })
       ],
       2

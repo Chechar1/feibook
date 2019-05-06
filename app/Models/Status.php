@@ -14,16 +14,15 @@ class Status extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
 
     public function like()
     {
@@ -43,9 +42,9 @@ class Status extends Model
     {
         return $this->likes()->where('user_id', auth()->id())->exists();
     }
+
     public function likesCount()
     {
         return $this->likes()->count();
     }
-
 }

@@ -37491,11 +37491,7 @@ var render = function() {
       _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
         _c("img", {
           staticClass: "rounded mr-3 shadow-sm",
-          attrs: {
-            width: "40px",
-            src: "https://aprendible.com/images/default-avatar.jpg",
-            alt: ""
-          }
+          attrs: { width: "40px", src: "https://picsum.photos/200", alt: "" }
         }),
         _vm._v(" "),
         _c("div", {}, [
@@ -37607,7 +37603,7 @@ var render = function() {
                     staticClass: "rounded shadow-sm mr-2",
                     attrs: {
                       width: "34px",
-                      src: "https://aprendible.com/images/default-avatar.jpg",
+                      src: "https://picsum.photos/200",
                       alt: _vm.currentUser.name
                     }
                   }),

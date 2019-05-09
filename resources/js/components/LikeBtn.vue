@@ -13,7 +13,7 @@
             class="btn btn-link btn-sm"
             dusk="like-btn"
     ><i class="far fa-thumbs-up text-primary mr-1"></i>
-        ME GUSTA
+        Me gusta
     </button>
 </template>
 

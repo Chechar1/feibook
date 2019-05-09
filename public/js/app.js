@@ -1974,7 +1974,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2008,7 +2007,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     likeComment: function likeComment(comment) {
       axios.post("/comments/".concat(comment.id, "/likes")).then(function (res) {
-        comment.like_count++;
+        comment.likes_count++;
         comment.is_liked = true;
       })["catch"](function (err) {
         console.log(err.response.data);
@@ -2016,7 +2015,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     unlikeComment: function unlikeComment(comment) {
       axios["delete"]("/comments/".concat(comment.id, "/likes")).then(function (res) {
-        comment.like_count--;
+        comment.likes_count--;
         comment.is_liked = false;
       })["catch"](function (err) {
         console.log(err.response.data);
@@ -6512,7 +6511,7 @@ function isSlowBuffer (obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.4.0
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -6522,7 +6521,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2019-04-10T19:48Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -6655,7 +6654,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.4.0",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -11011,8 +11010,12 @@ var documentElement = document.documentElement;
 		},
 		composed = { composed: true };
 
+	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
 	// Check attachment across shadow DOM boundaries when possible (gh-3504)
-	if ( documentElement.attachShadow ) {
+	// Support: iOS 10.0-10.2 only
+	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
+	// leading to errors. We need to check for `getRootNode`.
+	if ( documentElement.getRootNode ) {
 		isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem ) ||
 				elem.getRootNode( composed ) === elem.ownerDocument;
@@ -11872,8 +11875,7 @@ jQuery.event = {
 
 				// Claim the first handler
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					// dataPriv.set( el, "click", ... )
 					leverageNative( el, "click", returnTrue );
@@ -11890,8 +11892,7 @@ jQuery.event = {
 
 				// Force setup before triggering a click
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					leverageNative( el, "click" );
 				}
@@ -11932,7 +11933,9 @@ function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
-		jQuery.event.add( el, type, returnTrue );
+		if ( dataPriv.get( el, type ) === undefined ) {
+			jQuery.event.add( el, type, returnTrue );
+		}
 		return;
 	}
 
@@ -11947,9 +11950,13 @@ function leverageNative( el, type, expectSync ) {
 			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
 
 				// Interrupt processing of the outer synthetic .trigger()ed event
-				if ( !saved ) {
+				// Saved data should be false in such cases, but might be a leftover capture object
+				// from an async native handler (gh-4350)
+				if ( !saved.length ) {
 
 					// Store arguments for use when handling the inner native event
+					// There will always be at least one argument (an event object), so this array
+					// will not be confused with a leftover capture object.
 					saved = slice.call( arguments );
 					dataPriv.set( this, type, saved );
 
@@ -11962,14 +11969,14 @@ function leverageNative( el, type, expectSync ) {
 					if ( saved !== result || notAsync ) {
 						dataPriv.set( this, type, false );
 					} else {
-						result = undefined;
+						result = {};
 					}
 					if ( saved !== result ) {
 
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-						return result;
+						return result.value;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -11984,17 +11991,19 @@ function leverageNative( el, type, expectSync ) {
 
 			// If this is a native event triggered above, everything is now in order
 			// Fire an inner synthetic event with the original arguments
-			} else if ( saved ) {
+			} else if ( saved.length ) {
 
 				// ...and capture the result
-				dataPriv.set( this, type, jQuery.event.trigger(
+				dataPriv.set( this, type, {
+					value: jQuery.event.trigger(
 
-					// Support: IE <=9 - 11+
-					// Extend with the prototype to reset the above stopImmediatePropagation()
-					jQuery.extend( saved.shift(), jQuery.Event.prototype ),
-					saved,
-					this
-				) );
+						// Support: IE <=9 - 11+
+						// Extend with the prototype to reset the above stopImmediatePropagation()
+						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
+						saved.slice( 1 ),
+						this
+					)
+				} );
 
 				// Abort handling of the native event
 				event.stopImmediatePropagation();
@@ -37343,7 +37352,7 @@ var render = function() {
         },
         [
           _c("i", { staticClass: "far fa-thumbs-up text-primary mr-1" }),
-          _vm._v("\n    ME GUSTA\n")
+          _vm._v("\n    Me gusta\n")
         ]
       )
 }
@@ -37554,120 +37563,122 @@ var render = function() {
     _c(
       "div",
       { staticClass: "card-footer" },
-      _vm._l(_vm.comments, function(comment) {
-        return _c("div", { staticClass: "mb-2" }, [
-          _c("img", {
-            staticClass: "rounded shadow-sm float-left mr-2",
-            attrs: {
-              src: comment.user_avatar,
-              alt: comment.user_name,
-              width: "34px"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "card border-0 shadow-sm" }, [
-            _c("div", { staticClass: "card-body p-2 text-secondary" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("strong", [_vm._v(_vm._s(comment.user_name))])
-              ]),
-              _vm._v(
-                "\n                    " +
-                  _vm._s(comment.body) +
-                  "\n                "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("span", { attrs: { dusk: "comments-likes-count" } }, [
-            _vm._v(_vm._s(comment.likes_count))
-          ]),
-          _vm._v(" "),
-          comment.is_liked
-            ? _c(
-                "button",
-                {
-                  attrs: { dusk: "comment-unklike-btn" },
-                  on: {
-                    click: function($event) {
-                      return _vm.unlikeComment(comment)
-                    }
-                  }
-                },
-                [_vm._v("Te gusta")]
-              )
-            : _c(
-                "button",
-                {
-                  attrs: { dusk: "comment-like-btn" },
-                  on: {
-                    click: function($event) {
-                      return _vm.unlikeComment(comment)
-                    }
-                  }
-                },
-                [_vm._v("Me gusta")]
-              )
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _vm.isAuthenticated
-      ? _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.addComment($event)
+      [
+        _vm._l(_vm.comments, function(comment) {
+          return _c("div", { staticClass: "mb-3" }, [
+            _c("img", {
+              staticClass: "rounded shadow-sm float-left mr-2",
+              attrs: {
+                width: "34px",
+                src: comment.user_avatar,
+                alt: comment.user_name
               }
-            }
-          },
-          [
-            _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("img", {
-                staticClass: "rounded shadow-sm mr-2",
-                attrs: {
-                  width: "34px",
-                  src: "https://picsum.photos/200",
-                  alt: _vm.currentUser.name
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group" }, [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newComment,
-                      expression: "newComment"
-                    }
-                  ],
-                  staticClass: "form-control border-0",
-                  attrs: {
-                    name: "comment",
-                    placeholder: "Escribe un comentario...",
-                    rows: "1",
-                    required: ""
-                  },
-                  domProps: { value: _vm.newComment },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.newComment = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(0)
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card border-0 shadow-sm" }, [
+              _c("div", { staticClass: "card-body p-2 text-secondary" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("strong", [_vm._v(_vm._s(comment.user_name))])
+                ]),
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(comment.body) +
+                    "\n                "
+                )
               ])
-            ])
-          ]
-        )
-      : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("span", { attrs: { dusk: "comment-likes-count" } }, [
+              _vm._v(_vm._s(comment.likes_count))
+            ]),
+            _vm._v(" "),
+            comment.is_liked
+              ? _c(
+                  "button",
+                  {
+                    attrs: { dusk: "comment-unlike-btn" },
+                    on: {
+                      click: function($event) {
+                        return _vm.unlikeComment(comment)
+                      }
+                    }
+                  },
+                  [_vm._v("Te gusta")]
+                )
+              : _c(
+                  "button",
+                  {
+                    attrs: { dusk: "comment-like-btn" },
+                    on: {
+                      click: function($event) {
+                        return _vm.likeComment(comment)
+                      }
+                    }
+                  },
+                  [_vm._v("Me gusta")]
+                )
+          ])
+        }),
+        _vm._v(" "),
+        _vm.isAuthenticated
+          ? _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addComment($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("img", {
+                    staticClass: "rounded shadow-sm mr-2",
+                    attrs: {
+                      width: "34px",
+                      src: "https://picsum.photos/200",
+                      alt: _vm.currentUser.name
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newComment,
+                          expression: "newComment"
+                        }
+                      ],
+                      staticClass: "form-control border-0",
+                      attrs: {
+                        name: "comment",
+                        placeholder: "Escribe un comentario...",
+                        rows: "1",
+                        required: ""
+                      },
+                      domProps: { value: _vm.newComment },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.newComment = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ])
+                ])
+              ]
+            )
+          : _vm._e()
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [

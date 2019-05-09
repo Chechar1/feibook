@@ -22,20 +22,20 @@
             </div>
         </div>
         <div class="card-footer">
-            <div v-for="comment in comments" class="mb-2">
-                <img :src="comment.user_avatar" :alt="comment.user_name" class="rounded shadow-sm float-left mr-2" width="34px">
+
+            <div v-for="comment in comments" class="mb-3">
+                <img class="rounded shadow-sm float-left mr-2" width="34px" :src="comment.user_avatar" :alt="comment.user_name">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-2 text-secondary">
                         <a href="#"><strong>{{ comment.user_name }}</strong></a>
                         {{ comment.body }}
                     </div>
                 </div>
-                <span dusk="comments-likes-count">{{comment.likes_count}}</span>
-                <button v-if="comment.is_liked" dusk="comment-unklike-btn" @click="unlikeComment(comment)">Te gusta</button>
-                <button v-else dusk="comment-like-btn" @click="unlikeComment(comment)">Me gusta</button>
+                <span dusk="comment-likes-count">{{comment.likes_count}}</span>
+                <button v-if="comment.is_liked" dusk="comment-unlike-btn" @click="unlikeComment(comment)">Te gusta</button>
+                <button v-else dusk="comment-like-btn" @click="likeComment(comment)">Me gusta</button>
             </div>
-        </div>
-        <form @submit.prevent="addComment" v-if="isAuthenticated">
+            <form @submit.prevent="addComment" v-if="isAuthenticated">
                 <div class="d-flex align-items-center">
                     <img class="rounded shadow-sm mr-2" width="34px"
                          src="https://picsum.photos/200"
@@ -54,8 +54,7 @@
                     </div>
                 </div>
             </form>
-
-
+        </div>
     </div>
 </template>
 
@@ -87,29 +86,28 @@
                         console.log(err.response.data)
                     })
             },
-                    likeComment(comment){
-                        axios.post(`/comments/${comment.id}/likes`)
-                            .then(res => {
-                                comment.like_count ++;
-                                comment.is_liked = true;
-                            })
-                        .catch(err => {
-                            console.log(err.response.data)
-                        })
-                    },
-                    unlikeComment(comment){
-                        axios.delete(`/comments/${comment.id}/likes`)
-                            .then(res => {
-                                comment.like_count --;
-                                comment.is_liked = false;
-                            })
-                            .catch(err => {
-                                console.log(err.response.data)
-                            })
-                    }
+            likeComment(comment){
+                axios.post(`/comments/${comment.id}/likes`)
+                    .then(res => {
+                        comment.likes_count ++;
+                        comment.is_liked = true;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    })
+            },
+            unlikeComment(comment){
+                axios.delete(`/comments/${comment.id}/likes`)
+                    .then(res => {
+                        comment.likes_count --;
+                        comment.is_liked = false;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    })
             }
         }
-
+    }
 </script>
 
 <style scoped>

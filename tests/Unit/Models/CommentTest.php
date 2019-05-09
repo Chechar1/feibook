@@ -8,14 +8,11 @@ use App\Models\Comment;
 use App\Traits\HasLikes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CommentTest extends TestCase
-{
-    use RefreshDatabase;
+class CommentTest extends TestCase{
 
     /** @test */
     public function a_comment_model_must_use_the_trait_has_likes()
     {
-        $this->assertEquals(2, $comment->likesCount());
+        $this->assertClassUsesTrait(HasLikes::class, Comment::class);
     }
-
 }

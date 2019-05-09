@@ -1972,6 +1972,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1999,6 +2002,22 @@ __webpack_require__.r(__webpack_exports__);
         _this.newComment = '';
 
         _this.comments.push(res.data.data);
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    likeComment: function likeComment(comment) {
+      axios.post("/comments/".concat(comment.id, "/likes")).then(function (res) {
+        comment.like_count++;
+        comment.is_liked = true;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    unlikeComment: function unlikeComment(comment) {
+      axios["delete"]("/comments/".concat(comment.id, "/likes")).then(function (res) {
+        comment.like_count--;
+        comment.is_liked = false;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -37557,7 +37576,37 @@ var render = function() {
                   "\n                "
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("span", { attrs: { dusk: "comments-likes-count" } }, [
+            _vm._v(_vm._s(comment.likes_count))
+          ]),
+          _vm._v(" "),
+          comment.is_liked
+            ? _c(
+                "button",
+                {
+                  attrs: { dusk: "comment-unklike-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.unlikeComment(comment)
+                    }
+                  }
+                },
+                [_vm._v("Te gusta")]
+              )
+            : _c(
+                "button",
+                {
+                  attrs: { dusk: "comment-like-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.unlikeComment(comment)
+                    }
+                  }
+                },
+                [_vm._v("Me gusta")]
+              )
         ])
       }),
       0

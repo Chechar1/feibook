@@ -30,6 +30,9 @@
                         {{ comment.body }}
                     </div>
                 </div>
+                <span dusk="comments-likes-count">{{comment.likes_count}}</span>
+                <button v-if="comment.is_liked" dusk="comment-unklike-btn" @click="unlikeComment(comment)">Te gusta</button>
+                <button v-else dusk="comment-like-btn" @click="unlikeComment(comment)">Me gusta</button>
             </div>
         </div>
         <form @submit.prevent="addComment" v-if="isAuthenticated">
@@ -83,9 +86,30 @@
                     .catch(err => {
                         console.log(err.response.data)
                     })
+            },
+                    likeComment(comment){
+                        axios.post(`/comments/${comment.id}/likes`)
+                            .then(res => {
+                                comment.like_count ++;
+                                comment.is_liked = true;
+                            })
+                        .catch(err => {
+                            console.log(err.response.data)
+                        })
+                    },
+                    unlikeComment(comment){
+                        axios.delete(`/comments/${comment.id}/likes`)
+                            .then(res => {
+                                comment.like_count --;
+                                comment.is_liked = false;
+                            })
+                            .catch(err => {
+                                console.log(err.response.data)
+                            })
+                    }
             }
         }
-    }
+
 </script>
 
 <style scoped>

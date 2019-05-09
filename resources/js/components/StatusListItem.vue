@@ -2,7 +2,7 @@
     <div class="card border-0 mb-3 shadow-sm">
         <div class="card-body d-flex flex-column">
             <div class="d-flex align-items-center mb-3">
-                <img class="rounded mr-3 shadow-sm" width="40px" src="https://picsum.photos/200" alt="">
+                <img class="rounded mr-3 shadow-sm" width="40px" src="https://aprendible.com/images/default-avatar.jpg" alt="">
                 <div class="">
                     <h5 class="mb-1" v-text="status.user_name"></h5>
                     <div class="small text-muted" v-text="status.ago"></div>
@@ -13,7 +13,9 @@
         <div class="card-footer p-2 d-flex justify-content-between align-items-center">
 
             <like-btn
-                :status="status"
+                dusk="like-btn"
+                :url="`/statuses/${status.id}/likes`"
+                :model="status"
             ></like-btn>
 
             <div class="text-secondary mr-2">
@@ -32,13 +34,18 @@
                     </div>
                 </div>
                 <span dusk="comment-likes-count">{{comment.likes_count}}</span>
-                <button v-if="comment.is_liked" dusk="comment-unlike-btn" @click="unlikeComment(comment)">Te gusta</button>
-                <button v-else dusk="comment-like-btn" @click="likeComment(comment)">Me gusta</button>
+
+                <like-btn
+                    dusk="comment-like-btn"
+                    :url="`/comments/${comment.id}/likes`"
+                    :model="comment"
+                ></like-btn>
+
             </div>
             <form @submit.prevent="addComment" v-if="isAuthenticated">
                 <div class="d-flex align-items-center">
                     <img class="rounded shadow-sm mr-2" width="34px"
-                         src="https://picsum.photos/200"
+                         src="https://aprendible.com/images/default-avatar.jpg"
                          :alt="currentUser.name">
                     <div class="input-group">
                         <textarea v-model="newComment"
@@ -86,26 +93,7 @@
                         console.log(err.response.data)
                     })
             },
-            likeComment(comment){
-                axios.post(`/comments/${comment.id}/likes`)
-                    .then(res => {
-                        comment.likes_count ++;
-                        comment.is_liked = true;
-                    })
-                    .catch(err => {
-                        console.log(err.response.data)
-                    })
-            },
-            unlikeComment(comment){
-                axios.delete(`/comments/${comment.id}/likes`)
-                    .then(res => {
-                        comment.likes_count --;
-                        comment.is_liked = false;
-                    })
-                    .catch(err => {
-                        console.log(err.response.data)
-                    })
-            }
+
         }
     }
 </script>

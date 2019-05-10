@@ -2,10 +2,12 @@
 
 namespace Tests\Unit\Http\Resources;
 
-use App\Http\Resources\StatusResource;
-use App\Models\Status;
+use App\User;
 use Tests\TestCase;
+use App\Models\Status;
 use App\Models\Comment;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\StatusResource;
 use App\Http\Resources\CommentResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -59,7 +61,16 @@ class StatusResourceTest extends TestCase
         );
         $this->assertInstanceOf(
           Comment::class,
-          $statusResource['comments']->first()->resource
+            Comment::class,
+            $statusResource['comments']->first()->resource
+        );
+        $this->assertInstanceOf(
+            UserResource::class,
+            $statusResource['user']
+        );
+        $this->assertInstanceOf(
+            User::class,
+            $statusResource['user']->resource
         );
     }
 }

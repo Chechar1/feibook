@@ -50,3 +50,4 @@ class CommentResourceTest extends TestCase
         );
     }
 }
+

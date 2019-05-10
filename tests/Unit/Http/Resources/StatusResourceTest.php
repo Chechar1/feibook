@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Http\Resources;
 
+
 use App\User;
 use Tests\TestCase;
 use App\Models\Status;
@@ -32,18 +33,6 @@ class StatusResourceTest extends TestCase
             $statusResource['body']
         );
         $this->assertEquals(
-            $status->user->name,
-            $statusResource['user_name']
-        );
-        $this->assertEquals(
-            $status->user->link(),
-            $statusResource['user_link']
-        );
-        $this->assertEquals(
-            $status->user->avatar(),
-            $statusResource['user_avatar']
-        );
-        $this->assertEquals(
             $status->created_at->diffForHumans(),
             $statusResource['ago']
         );
@@ -60,7 +49,6 @@ class StatusResourceTest extends TestCase
             $statusResource['comments']->collects
         );
         $this->assertInstanceOf(
-          Comment::class,
             Comment::class,
             $statusResource['comments']->first()->resource
         );

@@ -6489,7 +6489,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".comments-like-btn[data-v-3e0c9a2a] {\n  font-size: 0.9em;\n  padding-left: 0;\n}\n.comments-like-btn i[data-v-3e0c9a2a] {\n  display: none;\n}", ""]);
+exports.push([module.i, ".comments-like-btn[data-v-3e0c9a2a] {\n  font-size: 0.7em;\n  padding-left: 0;\n}\n.comments-like-btn i[data-v-3e0c9a2a] {\n  display: none;\n}", ""]);
 
 // exports
 

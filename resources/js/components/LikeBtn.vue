@@ -55,7 +55,7 @@
 
 <style lang="scss" scoped>
     .comments-like-btn{
-        font-size: 0.6em;
+        font-size: 0.9em;
         padding-left: 0;
         i { display: none}
     }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasLikes;
+
     protected $guarded = [];
 
     public function user()

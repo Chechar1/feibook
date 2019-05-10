@@ -35,7 +35,7 @@
         },
         computed: {
             getText(){
-                return this.model.is_liked ? 'TE GUSTA' : 'Me gusta';
+                return this.model.is_liked ? 'TE GUSTA' : 'ME GUSTA';
             },
             getBtnClasses(){
                 return [
@@ -53,7 +53,10 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .comments-like-btn{
+        font-size: 0.6em;
+        padding-left: 0;
+        i { display: none}
+    }
 </style>
-

@@ -11,18 +11,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="card border-0 bg-light shadow-sm">
-                    <div class="card-body">
-                        @forelse($user->statuses as $status)
-                            {{$status->body}}
-                        @empty
-                            <div class="text-center">
-                                <div class="text-secondary">{{ $user->name }} no ha publicado nada todavía</div>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
+
+                <status-list
+                    url="{{route('users.statuses.index', $user)}}"
+                ></status-list>
             </div>
         </div>
     </div>

@@ -40,9 +40,10 @@ Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.
 
 // Dates routes
 Route::post('dates/{recipient}', 'DatesController@store')->name('dates.store');
-Route::delete('dates/{user}', 'DatesController@destroy')->name('dates.destroy');
+Route::delete('dates/{recipient}', 'DatesController@destroy')->name('dates.destroy');
 
 // Request Dates routes
-Route::post('request-dates/{sender}', 'RequestDatesController@store')->name('request-dates.store');
+Route::post('accept-dates/{sender}', 'AcceptDatesController@store')->name('accept-dates.store');
+Route::delete('accept-dates/{sender}', 'AcceptDatesController@destroy')->name('accept-dates.destroy');
 
 Route::auth();

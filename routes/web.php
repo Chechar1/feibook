@@ -38,5 +38,11 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 // Users statuses routes
 Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.statuses.index');
 
+// Dates routes
+Route::post('dates/{recipient}', 'DatesController@store')->name('dates.store');
+Route::delete('dates/{user}', 'DatesController@destroy')->name('dates.destroy');
+
+// Request Dates routes
+Route::post('request-dates/{sender}', 'RequestDatesController@store')->name('request-dates.store');
 
 Route::auth();

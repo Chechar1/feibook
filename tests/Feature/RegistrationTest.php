@@ -15,8 +15,6 @@ class RegistrationTest extends TestCase
     /** @test */
     public function users_can_register()
     {
-        $this->get(route('register'))->assertSuccessful();
-
         $response = $this->post(route('register'), $this->userValidData());
 
         $response->assertRedirect('/');
@@ -25,10 +23,11 @@ class RegistrationTest extends TestCase
             'name' => 'JorgeGarcia2',
             'first_name' => 'Jorge',
             'last_name' => 'García',
+            'email' => 'jorge@email.com',
         ]);
 
         $this->assertTrue(
-            Hash::check('secret', User::first()->password),
+            Hash::check('secr1et', User::first()->password),
             'The password needs to be hashed'
         );
     }

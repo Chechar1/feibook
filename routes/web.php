@@ -39,11 +39,11 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.statuses.index');
 
 // Dates routes
-Route::post('dates/{recipient}', 'DatesController@store')->name('dates.store');
-Route::delete('dates/{recipient}', 'DatesController@destroy')->name('dates.destroy');
+Route::post('dates/{recipient}', 'DatesController@store')->name('dates.store')->middleware('auth');
+Route::delete('dates/{recipient}', 'DatesController@destroy')->name('dates.destroy')->middleware('auth');
 
 // Request Dates routes
-Route::post('accept-dates/{sender}', 'AcceptDatesController@store')->name('accept-dates.store');
-Route::delete('accept-dates/{sender}', 'AcceptDatesController@destroy')->name('accept-dates.destroy');
+Route::post('accept-dates/{sender}', 'AcceptDatesController@store')->name('accept-dates.store')->middleware('auth');
+Route::delete('accept-dates/{sender}', 'AcceptDatesController@destroy')->name('accept-dates.destroy')->middleware('auth');
 
 Route::auth();

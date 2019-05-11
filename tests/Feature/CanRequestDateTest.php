@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\date;
+use App\Models\Date;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +10,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CanRequestdateTest extends TestCase
 {
     use RefreshDatabase;
+
+        /** @test */
+    public function guests_users_cannot_create_date_request()
+    {
+        $recipient = factory(User::class)->create();
+
+        $response = $this->postJson(route('dates.store', $recipient));
+
+        $response->assertStatus(401);
+    }
 
     /** @test */
     public function can_create_date_request()
@@ -27,6 +37,16 @@ class CanRequestdateTest extends TestCase
             'status' => 'pending'
         ]);
     }
+       /** @test */
+       public function guests_users_cannot_delete_date_request()
+       {
+           $recipient = factory(User::class)->create();
+
+           $response = $this->deleteJson(route('dates.destroy', $recipient));
+
+           $response->assertStatus(401);
+       }
+
 
     /** @test */
     public function can_delete_date_request()
@@ -47,6 +67,16 @@ class CanRequestdateTest extends TestCase
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
         ]);
+    }
+
+    /** @test */
+    public function guests_users_cannot_accept_date_request()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->postJson(route('accept-dates.store', $user));
+
+        $response->assertStatus(401);
     }
 
     /** @test */
@@ -71,6 +101,17 @@ class CanRequestdateTest extends TestCase
             'status' => 'accepted'
         ]);
     }
+
+    /** @test */
+    public function guests_users_cannot_deny_date_request()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->deleteJson(route('accept-dates.destroy', $user));
+
+        $response->assertStatus(401);
+    }
+
 
     /** @test */
     public function can_deny_date_request()

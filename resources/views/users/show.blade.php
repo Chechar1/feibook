@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -8,14 +9,10 @@
                     <img src="{{$user->avatar}}" alt="{{ $user->name }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
-                        <date-btn
-                            class="btn btn-primary btn-block"
-                            :recipient="{{ $user }}">
-                        </date-btn>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-9">
                 <status-list
                     url="{{route('users.statuses.index', $user)}}"
                 ></status-list>

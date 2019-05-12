@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Date extends Model
+class Cita extends Model
 {
     protected $guarded = [];
 }

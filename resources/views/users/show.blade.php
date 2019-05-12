@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -9,6 +8,11 @@
                     <img src="{{$user->avatar}}" alt="{{ $user->name }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
+                        <cita-btn
+                            class="btn btn-primary btn-block"
+                            :recipient="{{ $user }}"
+                        ></cita-btn>
+
                     </div>
                 </div>
             </div>

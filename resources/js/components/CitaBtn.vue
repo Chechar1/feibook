@@ -1,7 +1,7 @@
 <template>
     <button
-        @click="sendDateRequest"
-        dusk="request-date"
+        @click="sendCitaRequest"
+        dusk="request-cita"
     >
         {{ textBtn }}
     </button>
@@ -17,12 +17,12 @@
         },
         data(){
             return {
-                textBtn: 'Quiero una cita'
+                textBtn: 'Solicitar amistad'
             }
         },
         methods: {
-            sendDateRequest(){
-                axios.post(`dates/${this.recipient.name}`)
+            sendCitaRequest(){
+                axios.post(`citas/${this.recipient.name}`)
                     .then(res => {
                         this.textBtn = 'Solicitud enviada';
                     })

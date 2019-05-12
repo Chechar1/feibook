@@ -2,100 +2,100 @@
 
 namespace Tests\Feature;
 
-use App\Models\Date;
+use App\Models\Cita;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CanRequestdateTest extends TestCase
+class CanRequestCitaTest extends TestCase
 {
     use RefreshDatabase;
 
         /** @test */
-    public function guests_users_cannot_create_date_request()
+    public function guests_users_cannot_create_cita_request()
     {
         $recipient = factory(User::class)->create();
 
-        $response = $this->postJson(route('dates.store', $recipient));
+        $response = $this->postJson(route('citas.store', $recipient));
 
         $response->assertStatus(401);
     }
 
     /** @test */
-    public function can_create_date_request()
+    public function can_create_cita_request()
     {
         $this->withoutExceptionHandling();
 
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        $this->actingAs($sender)->postJson(route('dates.store', $recipient));
+        $this->actingAs($sender)->postJson(route('citas.store', $recipient));
 
-        $this->assertDatabaseHas('dates', [
+        $this->assertDatabaseHas('citas', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'pending'
         ]);
     }
        /** @test */
-       public function guests_users_cannot_delete_date_request()
+       public function guests_users_cannot_delete_cita_request()
        {
            $recipient = factory(User::class)->create();
 
-           $response = $this->deleteJson(route('dates.destroy', $recipient));
+           $response = $this->deleteJson(route('citas.destroy', $recipient));
 
            $response->assertStatus(401);
        }
 
 
     /** @test */
-    public function can_delete_date_request()
+    public function can_delete_cita_request()
     {
         $this->withoutExceptionHandling();
 
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        Date::create([
+        Cita::create([
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
         ]);
 
-        $this->actingAs($sender)->deleteJson(route('dates.destroy', $recipient));
+        $this->actingAs($sender)->deleteJson(route('citas.destroy', $recipient));
 
-        $this->assertDatabaseMissing('dates', [
+        $this->assertDatabaseMissing('citas', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
         ]);
     }
 
     /** @test */
-    public function guests_users_cannot_accept_date_request()
+    public function guests_users_cannot_accept_cita_request()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->postJson(route('accept-dates.store', $user));
+        $response = $this->postJson(route('accept-citas.store', $user));
 
         $response->assertStatus(401);
     }
 
     /** @test */
-    public function can_accept_date_request()
+    public function can_accept_cita_request()
     {
         $this->withoutExceptionHandling();
 
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        Date::create([
+        Cita::create([
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'pending'
         ]);
 
-        $this->actingAs($recipient)->postJson(route('accept-dates.store', $sender));
+        $this->actingAs($recipient)->postJson(route('accept-citas.store', $sender));
 
-        $this->assertDatabaseHas('dates', [
+        $this->assertDatabaseHas('citas', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'accepted'
@@ -103,33 +103,33 @@ class CanRequestdateTest extends TestCase
     }
 
     /** @test */
-    public function guests_users_cannot_deny_date_request()
+    public function guests_users_cannot_deny_cita_request()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->deleteJson(route('accept-dates.destroy', $user));
+        $response = $this->deleteJson(route('accept-citas.destroy', $user));
 
         $response->assertStatus(401);
     }
 
 
     /** @test */
-    public function can_deny_date_request()
+    public function can_deny_cita_request()
     {
         $this->withoutExceptionHandling();
 
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        Date::create([
+        Cita::create([
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'pending'
         ]);
 
-        $this->actingAs($recipient)->deleteJson(route('accept-dates.destroy', $sender));
+        $this->actingAs($recipient)->deleteJson(route('accept-citas.destroy', $sender));
 
-        $this->assertDatabaseHas('dates', [
+        $this->assertDatabaseHas('citas', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'denied'

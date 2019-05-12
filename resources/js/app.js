@@ -23,7 +23,7 @@ window.EventBus = new Vue();
 
 Vue.component('status-form', require('./components/StatusForm').default);
 Vue.component('status-list', require('./components/StatusList').default);
-Vue.component('date-btn', require('./components/DateBtn').default);
+Vue.component('cita-btn', require('./components/CitaBtn').default);
 
 
 import auth from './components/mixins/auth';

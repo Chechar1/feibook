@@ -1754,9 +1754,9 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DateBtn.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CitaBtn.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DateBtn.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CitaBtn.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1781,14 +1781,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      textBtn: 'Quiero una cita'
+      textBtn: 'Solicitar amistad'
     };
   },
   methods: {
-    sendDateRequest: function sendDateRequest() {
+    sendCitaRequest: function sendCitaRequest() {
       var _this = this;
 
-      axios.post("dates/".concat(this.recipient.name)).then(function (res) {
+      axios.post("citas/".concat(this.recipient.name)).then(function (res) {
         _this.textBtn = 'Solicitud enviada';
       })["catch"](function (err) {
         console.log(err.response.data);
@@ -38019,9 +38019,9 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true& ***!
   \**********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -38036,7 +38036,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "button",
-    { attrs: { dusk: "request-date" }, on: { click: _vm.sendDateRequest } },
+    { attrs: { dusk: "request-cita" }, on: { click: _vm.sendCitaRequest } },
     [_vm._v("\n    " + _vm._s(_vm.textBtn) + "\n")]
   )
 }
@@ -50599,7 +50599,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.EventBus = new Vue();
 Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm */ "./resources/js/components/StatusForm.vue")["default"]);
 Vue.component('status-list', __webpack_require__(/*! ./components/StatusList */ "./resources/js/components/StatusList.vue")["default"]);
-Vue.component('date-btn', __webpack_require__(/*! ./components/DateBtn */ "./resources/js/components/DateBtn.vue")["default"]);
+Vue.component('cita-btn', __webpack_require__(/*! ./components/CitaBtn */ "./resources/js/components/CitaBtn.vue")["default"]);
 
 Vue.mixin(_components_mixins_auth__WEBPACK_IMPORTED_MODULE_0___default.a);
 /**
@@ -50672,17 +50672,17 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/DateBtn.vue":
+/***/ "./resources/js/components/CitaBtn.vue":
 /*!*********************************************!*\
-  !*** ./resources/js/components/DateBtn.vue ***!
+  !*** ./resources/js/components/CitaBtn.vue ***!
   \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DateBtn.vue?vue&type=template&id=2b036233&scoped=true& */ "./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true&");
-/* harmony import */ var _DateBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateBtn.vue?vue&type=script&lang=js& */ "./resources/js/components/DateBtn.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true& */ "./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true&");
+/* harmony import */ var _CitaBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CitaBtn.vue?vue&type=script&lang=js& */ "./resources/js/components/CitaBtn.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50692,50 +50692,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _DateBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CitaBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "2b036233",
+  "ce34f624",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/DateBtn.vue"
+component.options.__file = "resources/js/components/CitaBtn.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/DateBtn.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/CitaBtn.vue?vue&type=script&lang=js&":
 /*!**********************************************************************!*\
-  !*** ./resources/js/components/DateBtn.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/CitaBtn.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DateBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DateBtn.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DateBtn.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DateBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CitaBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CitaBtn.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CitaBtn.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CitaBtn_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true&":
+/***/ "./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true&":
 /*!****************************************************************************************!*\
-  !*** ./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true& ***!
+  !*** ./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true& ***!
   \****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DateBtn.vue?vue&type=template&id=2b036233&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DateBtn.vue?vue&type=template&id=2b036233&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CitaBtn.vue?vue&type=template&id=ce34f624&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateBtn_vue_vue_type_template_id_2b036233_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitaBtn_vue_vue_type_template_id_ce34f624_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -38,12 +38,12 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 // Users statuses routes
 Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.statuses.index');
 
-// Dates routes
-Route::post('dates/{recipient}', 'DatesController@store')->name('dates.store')->middleware('auth');
-Route::delete('dates/{recipient}', 'DatesController@destroy')->name('dates.destroy')->middleware('auth');
+// Citas routes
+Route::post('citas/{recipient}', 'CitasController@store')->name('citas.store')->middleware('auth');
+Route::delete('citas/{recipient}', 'CitasController@destroy')->name('citas.destroy')->middleware('auth');
 
-// Request Dates routes
-Route::post('accept-dates/{sender}', 'AcceptDatesController@store')->name('accept-dates.store')->middleware('auth');
-Route::delete('accept-dates/{sender}', 'AcceptDatesController@destroy')->name('accept-dates.destroy')->middleware('auth');
+// Request citas routes
+Route::post('accept-citas/{sender}', 'AcceptCitasController@store')->name('accept-citas.store')->middleware('auth');
+Route::delete('accept-citas/{sender}', 'AcceptCitasController@destroy')->name('accept-citas.destroy')->middleware('auth');
 
 Route::auth();

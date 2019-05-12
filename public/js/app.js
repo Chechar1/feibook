@@ -1771,28 +1771,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     recipient: {
       type: Object,
       required: true
+    },
+    citaStatus: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
     return {
-      textBtn: 'Solicitar amistad'
+      localCitaStatus: this.citaStatus
     };
   },
   methods: {
-    sendCitaRequest: function sendCitaRequest() {
+    toggleCitaStatus: function toggleCitaStatus() {
       var _this = this;
 
-      axios.post("citas/".concat(this.recipient.name)).then(function (res) {
+      var method = this.getMethod();
+      axios[method]("citas/".concat(this.recipient.name)).then(function (res) {
         _this.textBtn = 'Solicitud enviada';
+        _this.localCitaStatus = res.data.Cita_status;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
+    },
+    getMethod: function getMethod() {
+      if (this.localCitaStatus === 'pending') {
+        return 'delete';
+      }
+
+      return 'post';
+    }
+  },
+  computed: {
+    getText: function getText() {
+      if (this.localCitaStatus === 'pending') {
+        return 'Cancelar solicitud';
+      }
+
+      return 'Quiero una cita';
     }
   }
 });
@@ -38034,11 +38055,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "button",
-    { attrs: { dusk: "request-cita" }, on: { click: _vm.sendCitaRequest } },
-    [_vm._v("\n    " + _vm._s(_vm.textBtn) + "\n")]
-  )
+  return _c("button", { on: { click: _vm.toggleCitaStatus } }, [
+    _vm._v("\n    " + _vm._s(_vm.getText) + "\n")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

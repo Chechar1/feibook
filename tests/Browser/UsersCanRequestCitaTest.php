@@ -7,7 +7,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UsersCanRequestDateTest extends DuskTestCase
+class UsersCanRequestCitaTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -15,7 +15,7 @@ class UsersCanRequestDateTest extends DuskTestCase
      * @test
      * @throws \Throwable
      */
-    public function users_can_request_date()
+    public function senders_can_create_and_delete_cita_requests()
     {
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
@@ -23,9 +23,14 @@ class UsersCanRequestDateTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($sender, $recipient) {
             $browser->loginAs($sender)
                 ->visit(route('users.show', $recipient))
-                ->press('@request-Date')
-                ->waitForText('Solicitud enviada')
-                ->assertSee('Solicitud enviada')
+                ->press('@request-cita')
+                ->waitForText('Cancelar solicitud')
+                ->assertSee('Cancelar solicitud')
+                ->visit(route('users.show', $recipient))
+                ->assertSee('Cancelar solicitud')
+                ->press('@request-cita')
+                ->waitForText('Solicitar amistad')
+                ->assertSee('Solicitar amistad')
             ;
         });
     }

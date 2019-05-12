@@ -9,12 +9,11 @@ class UsersController extends Controller
 {
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
         $citaStatus = optional(Cita::where([
             'recipient_id' => $user->id,
             'sender_id' => auth()->id()
         ])->first())->status;
 
-        return view('users.show', compact('user', 'dateStatus'));
+        return view('users.show', compact('user', 'citaStatus'));
     }
 }

@@ -15,7 +15,7 @@ class CitasController extends Controller
         ]);
 
         return response()->json([
-           'date_status' => 'pending'
+           'cita_status' => 'pending'
         ]);
     }
 
@@ -27,7 +27,7 @@ class CitasController extends Controller
         ])->delete();
 
         return response()->json([
-            'date_status' => 'deleted'
+            'cita_status' => 'deleted'
         ]);
     }
 }

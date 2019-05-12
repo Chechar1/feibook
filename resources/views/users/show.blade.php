@@ -9,7 +9,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
                         <cita-btn
+                            dusk="request-cita"
                             class="btn btn-primary btn-block"
+                            cita-status="{{ $citaStatus }}"
                             :recipient="{{ $user }}"
                         ></cita-btn>
 

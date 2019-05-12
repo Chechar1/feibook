@@ -2,16 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Models\Cita;
 use App\User;
 use Tests\TestCase;
+use App\Models\Cita;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CanRequestCitaTest extends TestCase
 {
     use RefreshDatabase;
 
-        /** @test */
+    /** @test */
     public function guests_users_cannot_create_cita_request()
     {
         $recipient = factory(User::class)->create();
@@ -24,29 +24,34 @@ class CanRequestCitaTest extends TestCase
     /** @test */
     public function can_create_cita_request()
     {
-        $this->withoutExceptionHandling();
-
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        $this->actingAs($sender)->postJson(route('citas.store', $recipient));
+        $response = $this->actingAs($sender)->postJson(route('citas.store', $recipient));
+
+        $response->assertJson([
+           'cita_status' => 'pending'
+        ]);
 
         $this->assertDatabaseHas('citas', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'pending'
         ]);
+
+        $this->actingAs($sender)->postJson(route('citas.store', $recipient));
+        $this->assertCount(1, Cita::all());
     }
-       /** @test */
-       public function guests_users_cannot_delete_cita_request()
-       {
-           $recipient = factory(User::class)->create();
 
-           $response = $this->deleteJson(route('citas.destroy', $recipient));
+    /** @test */
+    public function guests_users_cannot_delete_cita_request()
+    {
+        $recipient = factory(User::class)->create();
 
-           $response->assertStatus(401);
-       }
+        $response = $this->deleteJson(route('citas.destroy', $recipient));
 
+        $response->assertStatus(401);
+    }
 
     /** @test */
     public function can_delete_cita_request()
@@ -61,7 +66,11 @@ class CanRequestCitaTest extends TestCase
             'recipient_id' => $recipient->id,
         ]);
 
-        $this->actingAs($sender)->deleteJson(route('citas.destroy', $recipient));
+        $response = $this->actingAs($sender)->deleteJson(route('citas.destroy', $recipient));
+
+        $response->assertJson([
+            'Cita_status' => 'deleted'
+        ]);
 
         $this->assertDatabaseMissing('citas', [
             'sender_id' => $sender->id,
@@ -111,7 +120,6 @@ class CanRequestCitaTest extends TestCase
 
         $response->assertStatus(401);
     }
-
 
     /** @test */
     public function can_deny_cita_request()

@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use App\Models\Cita;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UsersCanRequestCitaTest extends DuskTestCase
@@ -34,4 +35,32 @@ class UsersCanRequestCitaTest extends DuskTestCase
             ;
         });
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function recipients_can_accept_and_deny_cita_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+
+        Cita::create([
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($recipient)
+                ->visit(route('accept-citas.index'))
+                ->assertSee($sender->name)
+                ->press('@accept-cita')
+                ->waitForText('son amigos')
+                ->assertSee('son amigos')
+                ->visit(route('accept-citas.index'))
+                ->assertSee('son amigos')
+            ;
+        });
+    }
+
 }

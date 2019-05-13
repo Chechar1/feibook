@@ -42,7 +42,8 @@ Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.
 Route::post('citas/{recipient}', 'CitasController@store')->name('citas.store')->middleware('auth');
 Route::delete('citas/{recipient}', 'CitasController@destroy')->name('citas.destroy')->middleware('auth');
 
-// Request citas routes
+// Accept citas routes
+Route::get('pretendientes/requests', 'AcceptCitasController@index')->name('accept-citas.index');
 Route::post('accept-citas/{sender}', 'AcceptCitasController@store')->name('accept-citas.store')->middleware('auth');
 Route::delete('accept-citas/{sender}', 'AcceptCitasController@destroy')->name('accept-citas.destroy')->middleware('auth');
 

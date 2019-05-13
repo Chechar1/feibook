@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class AcceptCitasController extends Controller
 {
+    public function index()
+    {
+        $citaRequests = Cita::with('sender')->where([
+            'recipient_id' => auth()->id(),
+        ])->get();
+
+        return view('citas.index', compact('citaRequests'));
+    }
+
     public function store(User $sender)
     {
         Cita::where([

@@ -55,10 +55,10 @@ class UsersCanRequestCitaTest extends DuskTestCase
                 ->visit(route('accept-citas.index'))
                 ->assertSee($sender->name)
                 ->press('@accept-cita')
-                ->waitForText('son amigos')
-                ->assertSee('son amigos')
+                ->waitForText('pueden concretar una cita')
+                ->assertSee('pueden concretar una cita')
                 ->visit(route('accept-citas.index'))
-                ->assertSee('son amigos')
+                ->assertSee('pueden concretar una cita')
             ;
         });
     }

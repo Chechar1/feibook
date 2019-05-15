@@ -27,9 +27,9 @@
         },
         methods:{
             acceptCitaRequest(){
-                axios.post(`/accept-friendships/${this.sender.name}`)
+                axios.post(`/accept-citas/${this.sender.name}`)
                     .then(res => {
-                        this.localFriendshipStatus = 'accepted'
+                        this.localCitaStatus = 'accepted'
                     })
                     .catch(err => {
                         console.log(err.response.data);

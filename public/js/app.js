@@ -1875,7 +1875,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getMethod: function getMethod() {
-      if (this.localFriendshipStatus === 'pending') {
+      if (this.localFriendshipStatus === 'pending' || this.localFriendshipStatus === 'accepted') {
         return 'delete';
       }
 
@@ -1886,6 +1886,14 @@ __webpack_require__.r(__webpack_exports__);
     getText: function getText() {
       if (this.localFriendshipStatus === 'pending') {
         return 'Cancelar solicitud';
+      }
+
+      if (this.localFriendshipStatus === 'accepted') {
+        return 'Eliminar';
+      }
+
+      if (this.localFriendshipStatus === 'denied') {
+        return 'Solicitud denegada';
       }
 
       return 'Quiero una cita';

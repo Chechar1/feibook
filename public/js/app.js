@@ -1773,6 +1773,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     sender: {
@@ -1794,7 +1798,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post("/accept-friendships/".concat(this.sender.name)).then(function (res) {
-        _this.localFriendshipStatus = 'accepted';
+        _this.localFriendshipStatus = res.data.friendship_status;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    denyFriendshipRequest: function denyFriendshipRequest() {
+      var _this2 = this;
+
+      axios["delete"]("/accept-friendships/".concat(this.sender.name)).then(function (res) {
+        _this2.localFriendshipStatus = res.data.friendship_status;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -38107,16 +38120,32 @@ var render = function() {
   return _vm.localFriendshipStatus === "pending"
     ? _c("div", [
         _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } }),
-        _vm._v(" quiere una cita\n    "),
+        _vm._v(" te ha enviado una solicitud de amistad\n    "),
         _c("button", { on: { click: _vm.acceptFriendshipRequest } }, [
           _vm._v("Aceptar solicitud")
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { dusk: "deny-friendship" },
+            on: { click: _vm.denyFriendshipRequest }
+          },
+          [_vm._v("Denegar solicitud")]
+        )
       ])
-    : _c("div", [
+    : _vm.localFriendshipStatus === "accepted"
+    ? _c("div", [
         _vm._v("\n    Tú y "),
         _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } }),
-        _vm._v(" pueden concretar una cita\n")
+        _vm._v(" son amigos\n")
       ])
+    : _vm.localFriendshipStatus === "denied"
+    ? _c("div", [
+        _vm._v("\n    Solicitud denegada de "),
+        _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } })
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

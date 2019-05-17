@@ -27,13 +27,13 @@
         },
         methods:{
             acceptFriendshipRequest(){
-               axios.post(`/accept-friendships/${this.sender.name}`)
-                   .then(res => {
-                       this.localFriendshipStatus = 'accepted'
-                   })
-                   .catch(err => {
-                       console.log(err.response.data);
-                   })
+                axios.post(`/accept-friendships/${this.sender.name}`)
+                    .then(res => {
+                        this.localFriendshipStatus = 'accepted'
+                    })
+                    .catch(err => {
+                        console.log(err.response.data);
+                    })
             }
         }
     }

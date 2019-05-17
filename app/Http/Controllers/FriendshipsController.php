@@ -26,9 +26,6 @@ class FriendshipsController extends Controller
     {
         $friendship = Friendship::betweenUsers(auth()->user(), $user)->first();
 
-        $this->authorize('delete', $friendship);
-
-
         if ($friendship->status === 'denied' && (int) $friendship->sender_id === auth()->id()) {
             return response()->json([
                 'friendship_status' => 'denied'

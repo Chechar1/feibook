@@ -38,13 +38,12 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 // Users statuses routes
 Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.statuses.index');
 
-// Citas routes
-Route::post('citas/{recipient}', 'CitasController@store')->name('citas.store')->middleware('auth');
-Route::delete('citas/{recipient}', 'CitasController@destroy')->name('citas.destroy')->middleware('auth');
+// Friendships routes
+Route::post('friendships/{recipient}', 'FriendshipsController@store')->name('friendships.store');
+Route::delete('friendships/{user}', 'FriendshipsController@destroy')->name('friendships.destroy');
 
-// Accept citas routes
-Route::get('propuestas/requests', 'AcceptCitasController@index')->name('accept-citas.index');
-Route::post('accept-citas/{sender}', 'AcceptCitasController@store')->name('accept-citas.store')->middleware('auth');
-Route::delete('accept-citas/{sender}', 'AcceptCitasController@destroy')->name('accept-citas.destroy')->middleware('auth');
+// Request Friendships routes
+Route::post('request-friendships/{sender}', 'RequestFriendshipsController@store')->name('request-friendships.store');
+
 
 Route::auth();

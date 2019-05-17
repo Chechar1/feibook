@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitasTable extends Migration
+class CreateFriendshipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCitasTable extends Migration
      */
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('friendships', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('sender_id')->index();
             $table->unsignedInteger('recipient_id')->index();
-            $table->enum('status', ['pending', 'accepted', 'denied'])->default('pending');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateCitasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('friendships');
     }
 }

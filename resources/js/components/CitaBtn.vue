@@ -29,8 +29,7 @@
 
                 axios[method](`citas/${this.recipient.name}`)
                     .then(res => {
-                        this.textBtn = 'Solicitud enviada';
-                        this.localCitaStatus = res.data.Cita_status;
+                        this.localCitaStatus = res.data.cita_status;
                     })
                     .catch(err => {
                         console.log(err.response.data);

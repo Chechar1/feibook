@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Models\Cita;
-use Illuminate\Http\Request;
 
 class AcceptCitasController extends Controller
 {

@@ -24,7 +24,8 @@ window.EventBus = new Vue();
 Vue.component('status-form', require('./components/StatusForm').default);
 Vue.component('status-list', require('./components/StatusList').default);
 Vue.component('cita-btn', require('./components/CitaBtn').default);
-Vue.component('accept-cita-btn', require('./components/AcceptCitaBtn'));
+Vue.component('accept-cita-btn', require('./components/AcceptCitaBtn').default);
+
 
 
 

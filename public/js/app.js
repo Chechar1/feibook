@@ -1773,10 +1773,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     sender: {
-      type: Object,
+      type: object,
       required: true
     },
     citaStatus: {
@@ -1786,7 +1787,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      localCitaStatus: this.itaStatus
+      localCitaStatus: this.citaStatus
     };
   },
   methods: {
@@ -1794,7 +1795,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post("/accept-citas/".concat(this.sender.name)).then(function (res) {
-        _this.localCitaStatus = 'accepted';
+        _this.localCitasStatus = 'accepted';
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -1843,8 +1844,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var method = this.getMethod();
       axios[method]("citas/".concat(this.recipient.name)).then(function (res) {
-        _this.textBtn = 'Solicitud enviada';
-        _this.localCitaStatus = res.data.Cita_status;
+        _this.localCitaStatus = res.data.cita_status;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -38108,7 +38108,7 @@ var render = function() {
   return _vm.localCitaStatus === "pending"
     ? _c("div", [
         _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } }),
-        _vm._v(" quiere tener una cita\n    "),
+        _vm._v(" quiere una cita\n    "),
         _c("button", { on: { click: _vm.acceptCitaRequest } }, [
           _vm._v("Aceptar solicitud")
         ])
@@ -50705,7 +50705,7 @@ window.EventBus = new Vue();
 Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm */ "./resources/js/components/StatusForm.vue")["default"]);
 Vue.component('status-list', __webpack_require__(/*! ./components/StatusList */ "./resources/js/components/StatusList.vue")["default"]);
 Vue.component('cita-btn', __webpack_require__(/*! ./components/CitaBtn */ "./resources/js/components/CitaBtn.vue")["default"]);
-Vue.component('accept-cita-btn', __webpack_require__(/*! ./components/AcceptCitaBtn */ "./resources/js/components/AcceptCitaBtn.vue"));
+Vue.component('accept-cita-btn', __webpack_require__(/*! ./components/AcceptCitaBtn */ "./resources/js/components/AcceptCitaBtn.vue")["default"]);
 
 Vue.mixin(_components_mixins_auth__WEBPACK_IMPORTED_MODULE_0___default.a);
 /**

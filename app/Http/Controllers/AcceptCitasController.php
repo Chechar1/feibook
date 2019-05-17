@@ -23,6 +23,10 @@ class AcceptCitasController extends Controller
             'sender_id' => $sender->id,
             'recipient_id' => auth()->id(),
             ])->update(['status' => 'accepted']);
+
+            return response()->json([
+                'cita_status' => 'accepted'
+            ]);
         }
 
         public function destroy(User $sender)
@@ -31,6 +35,10 @@ class AcceptCitasController extends Controller
                 'sender_id' => $sender->id,
                 'recipient_id' => auth()->id(),
             ])->update(['status' => 'denied']);
+
+            return response()->json([
+                'cita_status' => 'denied'
+            ]);
         }
 
 }

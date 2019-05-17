@@ -8,12 +8,12 @@
                     <img src="{{$user->avatar}}" alt="{{ $user->name }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
-                        <cita-btn
-                        dusk="request-cita"
+                        <friendship-btn
+                            dusk="request-friendship"
                             class="btn btn-primary btn-block"
-                            cita-status="{{ $citaStatus }}"
+                            friendship-status="{{ $friendshipStatus }}"
                             :recipient="{{ $user }}"
-                        ></cita-btn>
+                        ></friendship-btn>
                     </div>
                 </div>
             </div>

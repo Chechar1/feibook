@@ -1,6 +1,6 @@
 <template>
     <button
-        @click="toggleCitaStatus"
+        @click="toggleFriendshipStatus"
     >
         {{ getText }}
     </button>
@@ -13,30 +13,30 @@
                 type: Object,
                 required: true
             },
-            citaStatus: {
+            friendshipStatus: {
                 type: String,
                 required: true
             }
         },
         data(){
             return {
-                localCitaStatus: this.citaStatus
+                localFriendshipStatus: this.friendshipStatus
             }
         },
         methods: {
-            toggleCitaStatus(){
+            toggleFriendshipStatus(){
                 let method = this.getMethod();
 
-                axios[method](`citas/${this.recipient.name}`)
+                axios[method](`friendships/${this.recipient.name}`)
                     .then(res => {
-                        this.localCitaStatus = res.data.cita_status;
+                        this.localFriendshipStatus = res.data.friendship_status;
                     })
                     .catch(err => {
                         console.log(err.response.data);
                     })
             },
             getMethod(){
-                if (this.localCitaStatus === 'pending')
+                if (this.localFriendshipStatus === 'pending')
                 {
                     return 'delete';
                 }
@@ -45,7 +45,7 @@
         },
         computed: {
             getText(){
-                if (this.localCitaStatus === 'pending')
+                if (this.localFriendshipStatus === 'pending')
                 {
                     return 'Cancelar solicitud';
                 }

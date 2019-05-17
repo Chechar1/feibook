@@ -1,20 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
 Route::view('/', 'welcome')->name('home');
 
 // Statuses routes
@@ -38,13 +23,13 @@ Route::get('@{user}', 'UsersController@show')->name('users.show');
 // Users statuses routes
 Route::get('users/{user}/statuses', 'UsersStatusController@index')->name('users.statuses.index');
 
-// Citas routes
-Route::post('citas/{recipient}', 'CitasController@store')->name('citas.store')->middleware('auth');
-Route::delete('citas/{user}', 'CitasController@destroy')->name('citas.destroy')->middleware('auth');
+// Friendships routes
+Route::post('friendships/{recipient}', 'FriendshipsController@store')->name('friendships.store')->middleware('auth');
+Route::delete('friendships/{user}', 'FriendshipsController@destroy')->name('friendships.destroy')->middleware('auth');
 
-// Accept citas routes
-Route::get('pretendientes/requests', 'AcceptCitasController@index')->name('accept-citas.index');
-Route::post('accept-citas/{sender}', 'AcceptCitasController@store')->name('accept-citas.store')->middleware('auth');
-Route::delete('accept-citas/{sender}', 'AcceptCitasController@destroy')->name('accept-citas.destroy')->middleware('auth');
+// Accept Friendships routes
+Route::get('propuestas/requests', 'AcceptFriendshipsController@index')->name('accept-friendships.index')->middleware('auth');
+Route::post('accept-friendships/{sender}', 'AcceptFriendshipsController@store')->name('accept-friendships.store')->middleware('auth');
+Route::delete('accept-friendships/{sender}', 'AcceptFriendshipsController@destroy')->name('accept-friendships.destroy')->middleware('auth');
 
 Route::auth();

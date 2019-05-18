@@ -50,6 +50,6 @@
 
 <style>
     .status-list-transition-move{
-        transition: all 2s;
+        transition: all 1s;
     }
 </style>

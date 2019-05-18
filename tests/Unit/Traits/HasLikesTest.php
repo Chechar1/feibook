@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\Like;
 use App\Traits\HasLikes;
 use App\Events\ModelLiked;
+use App\Events\ModelUnliked;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -90,7 +91,6 @@ class HasLikesTest extends TestCase
     /** @test */
     public function a_model_knows_how_many_likes_it_has()
     {
-        $model = new ModelWithLikes(['id' => 1]);
         $model = new ModelWithLike(['id' => 1]);
 
         $this->assertEquals(0, $model->likesCount());
@@ -126,6 +126,32 @@ class HasLikesTest extends TestCase
     }
 
     /** @test */
+    public function an_event_is_fired_when_a_model_is_unliked()
+    {
+        Event::fake([ModelUnliked::class]);
+        Broadcast::shouldReceive('socket')->andReturn('socket-id');
+
+        $this->actingAs(factory(User::class)->create());
+
+        $model = ModelWithLike::create();
+
+        $model->likes()->firstOrCreate([
+            'user_id' => auth()->id()
+        ]);
+
+        $model->unlike();
+
+        Event::assertDispatched(ModelUnliked::class, function ($event) {
+            $this->assertInstanceOf(ModelWithLike::class, $event->model);
+            $this->assertEventChannelType('public', $event);
+            $this->assertEventChannelName($event->model->eventChannelName(), $event);
+            $this->assertDontBroadcastToCurrentUser($event);
+
+            return true;
+        });
+    }
+
+    /** @test */
     public function can_get_the_event_channel_name()
     {
         $model = new ModelWithLike(['id' => 1]);
@@ -136,6 +162,7 @@ class HasLikesTest extends TestCase
         );
     }
 }
+
 class ModelWithLike extends Model
 {
     use HasLikes;

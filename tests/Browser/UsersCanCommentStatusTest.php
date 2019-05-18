@@ -9,7 +9,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UserCanCommentStatusTest extends DuskTestCase
+class UsersCanCommentStatusTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -46,6 +46,31 @@ class UserCanCommentStatusTest extends DuskTestCase
                     ->press('@comment-btn')
                     ->waitForText($comment)
                     ->assertSee($comment)
+            ;
+        });
+    }
+
+    /** @test */
+    public function users_can_see_comments_in_real_time()
+    {
+        $status = factory(Status::class)->create();
+        $user = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser1, Browser $browser2) use ($status, $user) {
+            $comment = 'Mi primer comentario';
+
+            $browser1->visit('/');
+
+            $browser2->loginAs($user)
+                ->visit('/')
+                ->waitForText($status->body)
+                ->type('comment', $comment)
+                ->press('@comment-btn')
+            ;
+
+            $browser1
+                ->waitForText($comment)
+                ->assertSee($comment)
             ;
         });
     }

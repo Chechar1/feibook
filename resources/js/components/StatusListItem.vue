@@ -28,11 +28,9 @@
                 :comments="status.comments"
                 :status-id="status.id"
             ></comment-list>
-
             <comment-form
                 :status-id="status.id"
             ></comment-form>
-
         </div>
     </div>
 </template>
@@ -41,8 +39,6 @@
     import LikeBtn from './LikeBtn'
     import CommentList from './CommentList'
     import CommentForm from './CommentForm'
-
-
 
     export default {
         props: {

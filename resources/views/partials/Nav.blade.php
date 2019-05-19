@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-socialapp">
+<nav class="navbar navbar-expand-lg navbar-light navbar-feibook">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
             <i class="fa fa-address-book text-primary mr-1"></i>

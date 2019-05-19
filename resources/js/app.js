@@ -26,10 +26,10 @@ Vue.component('status-list', require('./components/StatusList').default);
 Vue.component('status-list-item', require('./components/StatusListItem').default);
 Vue.component('friendship-btn', require('./components/FriendshipBtn').default);
 Vue.component('accept-friendship-btn', require('./components/AcceptFriendshipBtn').default);
-//Vue.component('notification-list', require('./components/NotificationList').default);
+Vue.component('notification-list', require('./components/NotificationList').default);
 
 
-import auth from './components/mixins/auth';
+import auth from './mixins/auth';
 
 Vue.mixin(auth);
 

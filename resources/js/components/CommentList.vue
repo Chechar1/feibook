@@ -1,11 +1,11 @@
 <template>
-<div>
-    <comment-list-item
-        v-for="comment in comments"
-        :comment="comment"
-        :key="comment.id"
-        class="mb-3"
-    ></comment-list-item>
+    <div>
+        <comment-list-item
+            v-for="comment in comments"
+            :comment="comment"
+            :key="comment.id"
+            class="mb-3"
+        ></comment-list-item>
     </div>
 </template>
 

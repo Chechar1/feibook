@@ -26,6 +26,23 @@
                                 <input class="form-control border-0" type="email" name="email" placeholder="Tu email...">
                             </div>
                             <div class="form-group">
+                                <label>Edad:</label>
+                                <input class="form-control border-0" type="number" name="edad" placeholder="Tu edad...">
+                            </div>
+                            <div class="form-group">
+                                <label>Sexo:</label>
+                                <div>
+                                    <input class="border-0" type="radio" name="sexo" value="hombre"> Hombre
+                                </div>
+                                <div>
+                                    <input class="border-0" type="radio" name="sexo" value="mujer"> Mujer
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Foto perfil:</label>
+                                <input class="form-control border-0 btn-sm" type="file" name="imagen">
+                            </div>
+                            <div class="form-group">
                                 <label>Contraseña:</label>
                                 <input class="form-control border-0" type="password" name="password" placeholder="Tu contraseña...">
                             </div>

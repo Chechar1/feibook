@@ -16,4 +16,8 @@ class UsersController extends Controller
 
         return view('users.show', compact('user', 'friendshipStatus'));
     }
+
+    public function store(){
+        return view('users.avatar', compact('avatar'));
+    }
 }

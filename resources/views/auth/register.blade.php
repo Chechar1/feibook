@@ -39,6 +39,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>Foto perfil:</label>
+                                <input class="form-control border-0 btn-sm" type="file" name="imagen">
+                            </div>
+                            <div class="form-group">
                                 <label>Contraseña:</label>
                                 <input class="form-control border-0" type="password" name="password" placeholder="Tu contraseña...">
                             </div>

@@ -5,7 +5,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-2 text-secondary">
                     <a :href="comment.user.link"><strong>{{ comment.user.name }}</strong></a>
-                    <div class="card-text text secondary">{{ comment.body }}</div>
+                    {{ comment.body }}
                 </div>
             </div>
             <small class="badge badge-pill badge-primary py-1 px-2 mt-1 float-right" dusk="comment-likes-count">
